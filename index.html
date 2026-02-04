@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aptus Vet Admin</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-color: #f2ede7;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 240px;
+  background-color: #B7966B;
+  color: #fff;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.sidebar a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+
+.sidebar a:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+/* MAIN */
+.main {
+  flex: 1;
+  padding: 25px;
+  display: flex;
+  justify-content: center;
+}
+
+.section {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+
+  max-width: 600px;   
+  width: 100%;
+}
+
+#dashboard {
+  max-width: 720px;
+  margin: 60px auto;
+  text-align: center;
+}
+
+#dashboard h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #3f3f3f;
+  margin-bottom: 6px;
+}
+
+#dashboard p {
+  color: #8a8a8a;
+  font-size: 14px;
+  margin-bottom: 35px;
+}
+
+
+/* CARDS */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.card {
+  background: #F2F3F4;
+  padding: 40px 24px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+}
+
+.card h3 {
+    font-size: 20px !important;      
+    font-weight: 700 !important;      
+    color: #6f5b44 !important;
+    margin-bottom: 12px !important;
+}
+
+.card p {
+    font-size: 32px !important;       
+    font-weight: 800 !important;      
+    color: #4a3520 !important;
+    margin-top: 6px !important;
+    line-height: 1.1 !important;
+}
+
+.card::before {
+  content: "";
+  width: 40px;
+  height: 4px;
+  background: #c9b8a1;
+  display: block;
+  margin: 0 auto 14px;
+  border-radius: 10px;
+}
+
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+}
+
+th {
+  background-color: #f1ebe6;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 12px;
+}
+
+.pending { background: #e0a800; }
+.approved { background: #28a745; }
+.cancelled { background: #dc3545; }
+
+button {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.approve { background: #28a745; color: #fff; }
+.reject { background: #dc3545; color: #fff; }
+.edit { background: #007bff; color: #fff; }
+.delete { background: #dc3545; color: #fff; }
+
+/* FORMS */
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <h2>Aptus Vet</h2>
+  <nav>
+    <a href="index.html"><span class="icon">🏠</span> Dashboard</a>
+    <a href="appointments.html"><span class="icon">📅</span> Appointments</a>
+    <a href="products.html"><span class="icon">🛒</span> Shop / Products</a>
+    <a href="customers.html"><span class="icon">👥</span> Customers</a>
+    <a href="reports.html"><span class="icon">📊</span> Reports</a>
+    <a href="#"><span class="icon">🚪</span> Logout</a>
+  </nav>
+</div>
+
+<style>
+.sidebar {
+  width: 220px;
+  background-color: #B7966B;
+  color: #fff;
+  padding: 30px 20px;
+  border-radius: 0 20px 20px 0;
+  box-shadow: 4px 0 12px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: width 0.3s ease;
+}
+
+.sidebar h2 {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 40px;
+  font-size: 24px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: #fffdf8;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  color: #fffdf8;
+  text-decoration: none;
+  padding: 12px 15px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.sidebar a .icon {
+  margin-right: 12px;
+  font-size: 18px;
+}
+
+.sidebar a:hover {
+  background-color: rgba(255,255,255,0.15);
+  transform: translateX(5px);
+}
+
+.sidebar a:active {
+  background-color: rgba(255,255,255,0.25);
+}
+
+@media(max-width: 768px) {
+  .sidebar {
+    width: 60px;
+    padding: 20px 10px;
+  }
+  .sidebar h2 {
+    display: none;
+  }
+  .sidebar a {
+    justify-content: center;
+    font-size: 0;
+  }
+  .sidebar a .icon {
+    margin: 0;
+    font-size: 20px;
+  }
+}
+</style>
+
+<!-- DASHBOARD -->
+<section class="section" id="dashboard">
+  <h2>Admin Dashboard</h2>
+  <p style="color:#777; margin-bottom:20px;">
+    Overview of clinic activity today
+  </p>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Today's Appointments</h3>
+      <p>8</p>
+    </div>
+
+    <div class="card">
+      <h3>Pending Requests</h3>
+      <p>5</p>
+    </div>
+
+    <div class="card">
+      <h3>Total Products</h3>
+      <p>32</p>
+    </div>
+
+    <div class="card">
+      <h3>Registered Customers</h3>
+      <p>120</p>
+    </div>
+  </div>
+</section>
+
+
+
+</div>
+</body>
+</html>
